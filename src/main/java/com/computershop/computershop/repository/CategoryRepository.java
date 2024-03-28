@@ -1,6 +1,7 @@
 package com.computershop.computershop.repository;
 
 import com.computershop.computershop.entity.Category;
+import com.computershop.computershop.entity.dto.CategoryDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

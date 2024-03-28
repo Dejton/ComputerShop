@@ -2,6 +2,7 @@ package com.computershop.computershop.service.impl;
 
 import com.computershop.computershop.entity.Category;
 import com.computershop.computershop.entity.Product;
+import com.computershop.computershop.entity.dto.CategoryDto;
 import com.computershop.computershop.repository.CategoryRepository;
 import com.computershop.computershop.service.CategoryService;
 import jakarta.persistence.EntityNotFoundException;
@@ -21,8 +22,9 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category addCategory(Category category) {
-       return categoryRepository.save(category);
+    public Category addCategory(CategoryDto categoryDto ) {
+        Category category = CategoryDto.mapFromDto(categoryDto);
+        return categoryRepository.save(category);
     }
 
     @Override
@@ -31,8 +33,9 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category editCategoryById(long id, Category updatedCategory) {
+    public Category editCategoryById(long id, CategoryDto updatedCategoryDto) {
         Category categoryToUpdate = categoryRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Category with id " + id + " not found"));
+        Category updatedCategory = CategoryDto.mapFromDto(updatedCategoryDto);
         categoryToUpdate.setName(updatedCategory.getName());
         if (updatedCategory.getName().isEmpty()) {
             throw new IllegalArgumentException("name can't be empty!");
@@ -41,12 +44,16 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<Category> findAllCategories() {
-        return categoryRepository.findAll();
+    public List<CategoryDto> findAllCategories() {
+       List<Category> categories = categoryRepository.findAll();
+      return categories.stream()
+               .map(CategoryDto::mapToDto)
+               .toList();
+
     }
 //--------------------------------Dorobić jak skończę repo dla produktu
-    @Override
-    public List<Product> findAllProductForCategory(Category category) {
-        return null;
-    }
+//    @Override
+//    public List<ProductDto> findAllProductForCategory(Category category) {
+//        return null;
+//    }
 }
