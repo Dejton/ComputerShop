@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Builder
@@ -32,4 +33,6 @@ public class Product {
     private Producer producer;
     @Column(nullable = false, name = "amount_in_magazine")
     private int amountInMagazine;
+    @ElementCollection
+    private List<String> images;
 }

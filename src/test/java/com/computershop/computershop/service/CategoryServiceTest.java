@@ -77,10 +77,10 @@ class CategoryServiceTest {
     @Test
     void shouldReturnEditedCategory() {
 //        given
-        Category categoryToEdit = Category.builder()
+        Category editedCategory = Category.builder()
                 .name("Procesory")
                 .build();
-        CategoryDto categoryToEditDto = CategoryDto.mapToDto(categoryToEdit);
+        CategoryDto categoryToEditDto = CategoryDto.mapToDto(editedCategory);
         when(categoryRepository.findById(anyLong())).thenReturn(Optional.of(category));
         when(categoryRepository.save(any(Category.class))).thenReturn(category);
 //        when
@@ -101,13 +101,12 @@ class CategoryServiceTest {
         CategoryDto categoryToEditDto = CategoryDto.mapToDto(categoryToEdit);
         when(categoryRepository.findById(anyLong())).thenThrow(EntityNotFoundException.class);
 //        when
-
 //        then
         assertThrows(EntityNotFoundException.class, () -> categoryService.editCategoryById(category.getId(), categoryToEditDto));
     }
     @DisplayName("testing editing category when name is the same like already exist")
     @Test
-    void shouldThrowExceptionWhenNameISTheSame() {
+    void shouldThrowExceptionWhenNameIsTheSame() {
 //        given
         Category categoryToEdit = Category.builder()
                 .name("Procesory")
@@ -119,7 +118,7 @@ class CategoryServiceTest {
 //        then
         assertThrows(DataIntegrityViolationException.class, () -> categoryService.editCategoryById(category.getId(), categoryToEditDto));
     }
-    @DisplayName("testingEditingCategoryWhenNameIsEmpty")
+    @DisplayName("testing Editing Category WhenName Is Empty")
     @Test
     void shouldThrowExceptionWhenNameIsEmpty() {
 //        given
