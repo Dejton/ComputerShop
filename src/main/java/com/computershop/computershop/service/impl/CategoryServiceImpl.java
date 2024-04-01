@@ -51,9 +51,5 @@ public class CategoryServiceImpl implements CategoryService {
                .toList();
 
     }
-//--------------------------------Dorobić jak skończę repo dla produktu
-//    @Override
-//    public List<ProductDto> findAllProductForCategory(Category category) {
-//        return null;
-//    }
+
 }

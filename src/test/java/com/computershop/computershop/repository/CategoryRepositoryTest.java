@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.data.crossstore.ChangeSetPersister;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 //import static org.assertj.core.api.AssertionsForClassTypes.assertThat;

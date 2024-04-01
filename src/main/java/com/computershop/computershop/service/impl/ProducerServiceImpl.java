@@ -48,5 +48,4 @@ public class ProducerServiceImpl implements ProducerService {
                 .toList();
     }
 
-//    -------------------------- dorobić metodę do wyszukiwania produktów po producencie
 }

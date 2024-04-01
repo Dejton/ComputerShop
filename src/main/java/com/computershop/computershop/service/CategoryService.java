@@ -12,5 +12,4 @@ public interface CategoryService {
     Category editCategoryById(long id, CategoryDto categoryToUpdateDto);
     List<CategoryDto> findAllCategories();
 
-//    List<ProductDto> findAllProductForCategory(Category category);
 }
