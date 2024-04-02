@@ -121,14 +121,15 @@ class ProducerServiceTest {
     void shouldThrowExceptionWhenNameIsEmpty() {
 //        given
         Producer editedProducer = Producer.builder()
-                .name("Asus")
+                .name("  ")
                 .build();
         ProducerDto editedProducerDto = ProducerDto.mapToDto(editedProducer);
         when(producerRepository.findById(anyLong())).thenReturn(Optional.of(producer));
         when(producerRepository.save(any(Producer.class))).thenThrow(IllegalArgumentException.class);
 //        when
 //        then
-        assertThrows(IllegalArgumentException.class, () -> producerService.editProducerById(producer.getId(), editedProducerDto));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> producerService.editProducerById(producer.getId(), editedProducerDto));
+        assertEquals("name cannot be empty!", exception.getMessage());
     }
     @DisplayName("testing finding all producers")
     @Test

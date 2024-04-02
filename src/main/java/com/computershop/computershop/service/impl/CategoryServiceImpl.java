@@ -37,7 +37,7 @@ public class CategoryServiceImpl implements CategoryService {
         Category categoryToUpdate = categoryRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Category with id " + id + " not found"));
         Category updatedCategory = CategoryDto.mapFromDto(updatedCategoryDto);
         categoryToUpdate.setName(updatedCategory.getName());
-        if (updatedCategory.getName().isEmpty()) {
+        if (updatedCategory.getName().isBlank()) {
             throw new IllegalArgumentException("name can't be empty!");
         }
         return categoryRepository.save(categoryToUpdate);

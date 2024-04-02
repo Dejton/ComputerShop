@@ -34,8 +34,8 @@ public class ProducerServiceImpl implements ProducerService {
         Producer editedProducer = ProducerDto.mapFromDto(editedProducerDto);
 
         producerToEdit.setName(editedProducer.getName());
-        if (editedProducer.getName().isEmpty()) {
-            throw new IllegalArgumentException("name can't be empty!");
+        if (editedProducer.getName().isBlank()) {
+            throw new IllegalArgumentException("name cannot be empty!");
         }
         return producerRepository.save(producerToEdit);
     }
