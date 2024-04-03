@@ -68,7 +68,6 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public ProductDto getProductById(long id) {
-        System.out.println(id);
         if (id <= 0) {
             throw new IllegalArgumentException("Enter correct value!");
         }
