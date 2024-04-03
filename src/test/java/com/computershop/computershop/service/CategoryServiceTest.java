@@ -1,7 +1,6 @@
 package com.computershop.computershop.service;
 
 import com.computershop.computershop.entity.Category;
-import com.computershop.computershop.entity.Product;
 import com.computershop.computershop.entity.dto.CategoryDto;
 import com.computershop.computershop.repository.CategoryRepository;
 import com.computershop.computershop.service.impl.CategoryServiceImpl;
@@ -139,7 +138,7 @@ class CategoryServiceTest {
 //        given
         when(categoryRepository.findAll()).thenReturn(List.of(category));
 //        when
-        List<CategoryDto> categories = categoryService.findAllCategories();
+        List<CategoryDto> categories = categoryService.getAllCategories();
 //        then
         assertThat(categories).isNotEmpty();
         assertThat(categories.size()).isEqualTo(1);
