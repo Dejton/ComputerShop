@@ -34,5 +34,6 @@ public class Product {
     @Column(nullable = false, name = "amount_in_magazine")
     private int amountInMagazine;
     @ElementCollection
+    @CollectionTable(name = "images", joinColumns = @JoinColumn(name = "product_id"))
     private List<String> images;
 }
