@@ -41,11 +41,17 @@ public class ProducerServiceImpl implements ProducerService {
     }
 
     @Override
-    public List<ProducerDto> findAllProducers() {
+    public List<ProducerDto> getAllProducers() {
         List<Producer> producers = producerRepository.findAll();
         return producers.stream()
                 .map(ProducerDto::mapToDto)
                 .toList();
+    }
+
+    @Override
+    public ProducerDto getProducerById(long id) {
+        if (id < 0) throw new IllegalArgumentException("Enter correct value!");
+        return ProducerDto.mapToDto(producerRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("producer with id: " + id + " not found!")));
     }
 
 }

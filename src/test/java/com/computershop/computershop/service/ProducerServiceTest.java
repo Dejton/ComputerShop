@@ -48,6 +48,17 @@ class ProducerServiceTest {
         assertThat(savedProducer).isNotNull();
         assertThat(savedProducer.getId()).isEqualTo(producer.getId());
     }
+    @DisplayName("testing finding producer by id")
+    @Test
+    void shouldReturnProducerById() {
+//        given
+        when(producerRepository.findById(anyLong())).thenReturn(Optional.of(producer));
+//        when
+        ProducerDto foundProducer = producerService.getProducerById(producer.getId());
+//        then
+        assertThat(foundProducer).isNotNull();
+        assertThat(foundProducer.getId()).isEqualTo(producer.getId());
+    }
 
     @DisplayName("testing adding new producer when there is producer with the same name")
     @Test
@@ -137,7 +148,7 @@ class ProducerServiceTest {
 //        given
         when(producerRepository.findAll()).thenReturn(List.of(producer));
 //        when
-        List<ProducerDto> producers = producerService.findAllProducers();
+        List<ProducerDto> producers = producerService.getAllProducers();
 //        then
         assertThat(producers).isNotEmpty();
         assertThat(producers.size()).isEqualTo(1);
