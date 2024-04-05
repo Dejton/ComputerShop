@@ -1,5 +1,6 @@
 package com.computershop.computershop.repository;
 
+import com.computershop.computershop.TestBase;
 import com.computershop.computershop.entity.Category;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DataJpaTest
-class CategoryRepositoryTest {
+class CategoryRepositoryTest extends TestBase {
 
     @Autowired
     private CategoryRepository categoryRepository;

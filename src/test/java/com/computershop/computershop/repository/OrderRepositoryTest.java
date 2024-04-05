@@ -1,5 +1,6 @@
 package com.computershop.computershop.repository;
 
+import com.computershop.computershop.TestBase;
 import com.computershop.computershop.entity.Order;
 import com.computershop.computershop.entity.OrderedProduct;
 import com.computershop.computershop.entity.User;
@@ -18,7 +19,7 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 @DataJpaTest
-class OrderRepositoryTest {
+class OrderRepositoryTest extends TestBase {
     @Autowired
     private OrderRepository orderRepository;
     @Autowired

@@ -1,5 +1,6 @@
 package com.computershop.computershop.repository;
 
+import com.computershop.computershop.TestBase;
 import com.computershop.computershop.entity.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -14,7 +15,7 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 @DataJpaTest
-class UserRepositoryTest {
+class UserRepositoryTest extends TestBase {
     @Autowired
     private UserRepository userRepository;
     private User user;

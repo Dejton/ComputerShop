@@ -8,11 +8,9 @@ import com.computershop.computershop.repository.OrderRepository;
 import com.computershop.computershop.repository.UserRepository;
 import com.computershop.computershop.service.impl.OrderServiceImpl;
 import jakarta.persistence.EntityNotFoundException;
-import org.hibernate.action.internal.EntityActionVetoException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -20,10 +18,10 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
-@DataJpaTest
 class OrderServiceTest {
     private OrderRepository orderRepository = mock(OrderRepository.class);
     private UserRepository userRepository = mock(UserRepository.class);

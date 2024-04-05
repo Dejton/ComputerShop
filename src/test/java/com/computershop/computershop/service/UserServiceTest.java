@@ -5,23 +5,21 @@ import com.computershop.computershop.entity.dto.UserDto;
 import com.computershop.computershop.repository.UserRepository;
 import com.computershop.computershop.service.impl.UserServiceImpl;
 import jakarta.persistence.EntityNotFoundException;
-import lombok.Data;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
-@DataJpaTest
 class UserServiceTest {
     private final UserRepository userRepository = mock(UserRepository.class);
     private final UserServiceImpl userService = new UserServiceImpl(userRepository);

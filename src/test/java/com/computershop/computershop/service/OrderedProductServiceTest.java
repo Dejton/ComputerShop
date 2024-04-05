@@ -1,6 +1,8 @@
 package com.computershop.computershop.service;
 
-import com.computershop.computershop.entity.*;
+import com.computershop.computershop.entity.Order;
+import com.computershop.computershop.entity.OrderedProduct;
+import com.computershop.computershop.entity.Product;
 import com.computershop.computershop.entity.dto.OrderedProductDto;
 import com.computershop.computershop.repository.OrderedProductRepository;
 import com.computershop.computershop.service.impl.OrderedProductServiceImpl;
@@ -8,17 +10,16 @@ import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
-@DataJpaTest
 class OrderedProductServiceTest {
     private final OrderedProductRepository orderedProductRepository = mock(OrderedProductRepository.class);
     private final OrderedProductServiceImpl orderedProductService = new OrderedProductServiceImpl(orderedProductRepository);

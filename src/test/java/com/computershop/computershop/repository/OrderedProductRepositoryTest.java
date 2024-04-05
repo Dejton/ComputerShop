@@ -1,5 +1,6 @@
 package com.computershop.computershop.repository;
 
+import com.computershop.computershop.TestBase;
 import com.computershop.computershop.entity.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -19,7 +20,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @DataJpaTest
-class OrderedProductRepositoryTest {
+class OrderedProductRepositoryTest extends TestBase {
     @Autowired
     private OrderedProductRepository orderedProductRepository;
     @Autowired

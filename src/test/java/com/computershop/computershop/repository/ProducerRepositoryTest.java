@@ -1,5 +1,6 @@
 package com.computershop.computershop.repository;
 
+import com.computershop.computershop.TestBase;
 import com.computershop.computershop.entity.Producer;
 import com.computershop.computershop.entity.dto.ProducerDto;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 @DataJpaTest
-class ProducerRepositoryTest {
+class ProducerRepositoryTest extends TestBase {
     @Autowired
     private ProducerRepository producerRepository;
     private Producer producer;

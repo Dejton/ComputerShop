@@ -3,28 +3,27 @@ package com.computershop.computershop.service;
 import com.computershop.computershop.entity.Category;
 import com.computershop.computershop.entity.Producer;
 import com.computershop.computershop.entity.Product;
-import com.computershop.computershop.entity.dto.ProducerDto;
 import com.computershop.computershop.entity.dto.ProductDto;
 import com.computershop.computershop.repository.ProductRepository;
 import com.computershop.computershop.service.impl.ProductServiceImpl;
 import jakarta.persistence.EntityNotFoundException;
-import jdk.jshell.spi.ExecutionControl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import java.math.BigDecimal;
-import java.util.*;
-
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-@DataJpaTest
 class ProductServiceTest {
 
     private final ProductRepository productRepository = mock(ProductRepository.class);
