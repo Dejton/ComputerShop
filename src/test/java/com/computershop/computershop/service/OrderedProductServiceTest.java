@@ -22,6 +22,7 @@ import static org.mockito.Mockito.*;
 
 class OrderedProductServiceTest {
     private final OrderedProductRepository orderedProductRepository = mock(OrderedProductRepository.class);
+
     private final OrderedProductServiceImpl orderedProductService = new OrderedProductServiceImpl(orderedProductRepository);
 
     private OrderedProduct orderedProduct;

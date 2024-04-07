@@ -4,6 +4,7 @@ import com.computershop.computershop.entity.Order;
 import com.computershop.computershop.entity.dto.OrderDto;
 import com.computershop.computershop.service.OrderService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,4 +34,10 @@ public class OrderController {
     public void deleteOrderById(@PathVariable long id) {
         orderService.deleteOrderById(id);
     }
+    @PostMapping("/order/addproduct")
+    public ResponseEntity<String> addProductToOrder(@RequestParam Long userId, @RequestParam Long productId, @RequestParam int quantity) {
+       return orderService.addProductToOrder(userId,productId,quantity);
+    }
+
 }
+

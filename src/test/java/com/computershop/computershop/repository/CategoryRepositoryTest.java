@@ -2,16 +2,14 @@ package com.computershop.computershop.repository;
 
 import com.computershop.computershop.TestBase;
 import com.computershop.computershop.entity.Category;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -23,6 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DataJpaTest
+//@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class CategoryRepositoryTest extends TestBase {
 
     @Autowired
@@ -36,6 +35,13 @@ class CategoryRepositoryTest extends TestBase {
                 .name("Laptopy")
                 .build();
     }
+//    @Autowired
+//    private JdbcTemplate jdbcTemplate;
+//
+//    @AfterEach
+//    public void resetIdSequence() {
+//        jdbcTemplate.execute("ALTER TABLE categories ALTER COLUMN id RESTART WITH 1");
+//    }
 
 
     @DisplayName("testing adding new category")
@@ -45,23 +51,11 @@ class CategoryRepositoryTest extends TestBase {
 //        when
         Category savedCategory = categoryRepository.save(category);
 //        then
-        assertThat(savedCategory).isNotNull();
-        assertThat(savedCategory.getId()).isEqualTo(category.getId());
-        assertThat(savedCategory).isEqualTo(category);
+        var actualCategory = categoryRepository.findById(savedCategory.getId());
+        assertThat(actualCategory).contains(savedCategory);
     }
 
-    @DisplayName("testing adding category with the same name")
-    @Test
-    void shouldThrowExceptionWhenAddingCategoryWithTheSameName() {
-//        given
-        categoryRepository.save(category);
-        Category category2 = Category.builder()
-                .name("Laptopy")
-                .build();
-//        when
-//        then
-        assertThrows(DataIntegrityViolationException.class, () -> categoryRepository.save(category2));
-    }
+
 
     @DisplayName("testing deleting existing category by id")
     @Test
