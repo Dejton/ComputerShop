@@ -217,6 +217,12 @@ header h1 {
     top: 0;
     opacity: 1;
 }
+.quantitySelector {
+    display: none;
+}
+.card:hover .quantitySelector {
+    display: block;
+}
 
 .mouse {
     height: 300px;

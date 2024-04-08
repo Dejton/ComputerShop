@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sklep komputerowy</title>
     <link rel="stylesheet" href="/style.css">
+    <script src="/script.js"></script>
 </head>
 <body>
 <header>
@@ -14,17 +15,15 @@
             <li><a href="#">Rejestracja</a></li>
             <li><a href="#">Logowanie</a></li>
             <li class="dropdown">
-                <a href="#" class="dropbtn">Koszyk</a>
-                <div class="dropdown-content">
-                    <!-- Tutaj wyświetlana będzie lista produktów w koszyku -->
-                    <!-- Możesz użyć Thymeleafa, aby wyświetlać dynamicznie -->
+                <a href="#" class="dropbtn">Cart</a>
+                <div class="dropdown-content" th:each="orderedProduct:${orderedProducts}">
                     <div class="product-in-cart">
-                        <span class="product-in-cart-name">Nazwa innego produktu</span>
-                        <span>Ilość: 1</span>
-                        <span>Cena: $10.00</span>
+                        <span class="product-in-cart-name" th:text="${orderedProduct.getProduct().getName()}"></span>
+                        <span th:text=" 'Amount: '${orderedProduct.getQuantity()}"></span>
+                        <span th:text="'Price: '${orderedProduct.getPrice()}"></span>
                     </div>
                     <div class="total">
-                        <span>Wartość całego zamówienia: $50.00</span>
+                        <span th:text="'Total value: $'${totalValue}"></span>
                     </div>
                 </div>
             </li>
@@ -49,7 +48,11 @@
             <div class="contentBox">
                 <h3 th:text="${product.getName()}"></h3>
                 <h2 class="price" th:text="${product.getPrice()} + ' $'" ></h2>
-                <a href="#" class="buy">Buy Now</a>
+                <select class="quantitySelector" name="quantity" th:if="${product.getAmountInMagazine() > 0}">
+                    <!-- Pętla w Thymeleaf do wygenerowania opcji w zależności od amountInMagazine -->
+                    <option th:each="i : ${#numbers.sequence(1, product.getAmountInMagazine())}" th:value="${i}" th:text="${i}"></option>
+                </select>
+                <a href="#" class="buy" onclick="addToCart($(this))">Add to cart</a>
             </div>
         </div>
     </div>
