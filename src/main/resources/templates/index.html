@@ -16,14 +16,14 @@
             <li><a href="#">Logowanie</a></li>
             <li class="dropdown">
                 <a href="#" class="dropbtn">Cart</a>
-                <div class="dropdown-content" th:each="orderedProduct:${orderedProducts}">
-                    <div class="product-in-cart">
+                <div class="dropdown-content">
+                    <div class="product-in-cart" th:each=" orderedProduct:${orderedProducts}">
                         <span class="product-in-cart-name" th:text="${orderedProduct.getProduct().getName()}"></span>
-                        <span th:text=" 'Amount: '${orderedProduct.getQuantity()}"></span>
-                        <span th:text="'Price: '${orderedProduct.getPrice()}"></span>
+                        <span th:text=" 'Amount: ' + ${orderedProduct.getQuantity()}"></span>
+                        <span th:text="'Price: ' + ${orderedProduct.getPrice()}"></span>
                     </div>
                     <div class="total">
-                        <span th:text="'Total value: $'${totalValue}"></span>
+                        <span th:text="'Total amount: ' + ${totalAmount}"></span>
                     </div>
                 </div>
             </li>
@@ -39,8 +39,6 @@
 
 <main>
     <div class="product-container">
-        <!-- Tutaj będą wyświetlane produkty -->
-        <!-- Wstawienie przykładowego produktu -->
         <div class="card" th:each="product:${products}">
             <div class="imgBox">
                 <img src="https://www.corsair.com/corsairmedia/sys_master/productcontent/CH-9300011-NA-M65_PRO_RGB_BLK_04.png" alt="mouse corsair" class="mouse">
@@ -48,11 +46,16 @@
             <div class="contentBox">
                 <h3 th:text="${product.getName()}"></h3>
                 <h2 class="price" th:text="${product.getPrice()} + ' $'" ></h2>
-                <select class="quantitySelector" name="quantity" th:if="${product.getAmountInMagazine() > 0}">
-                    <!-- Pętla w Thymeleaf do wygenerowania opcji w zależności od amountInMagazine -->
-                    <option th:each="i : ${#numbers.sequence(1, product.getAmountInMagazine())}" th:value="${i}" th:text="${i}"></option>
-                </select>
-                <a href="#" class="buy" onclick="addToCart($(this))">Add to cart</a>
+                <form action="/add-order" method="post">
+                    <div class="form-group">
+                        <select class="quantitySelector" name="quantity" th:if="${product.getAmountInMagazine() > 0}">
+                            <option th:each="i : ${#numbers.sequence(1, product.getAmountInMagazine())}" th:value="${i}" th:text="${i}"></option>
+                        </select>
+                        <label for="id"></label>
+                        <input type="hidden" th:value="${product.getId()}" id="id" name="id" required>
+                    </div>
+                    <button type="submit" class="buy">Add to Cart</button>
+                </form>
             </div>
         </div>
     </div>

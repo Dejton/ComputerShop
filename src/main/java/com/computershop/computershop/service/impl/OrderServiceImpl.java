@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -106,7 +107,23 @@ public class OrderServiceImpl implements OrderService {
         return ResponseEntity.ok("The order status has been successfully updated.");
     }
 
+    @Override
+    public List<OrderedProductDto> getAllProductsInCart(User user, String status) {
+        Optional<Order> orderInProgress = orderRepository.findByUserAndStatus(user, "In progress");
+        if (orderInProgress.isEmpty()) {
+            return Collections.emptyList();
+        } else {
+            List<OrderedProduct> orderedProducts = orderInProgress.get().getOrderedProducts();
+            return orderedProducts.stream()
+                    .map(OrderedProductDto::matToDto)
+                    .toList();
+        }
+    }
 
+//    @Override
+//    public OrderDto getOrderByUserAndStatus(User user, String status) {
+//        return OrderDto.mapToDto(orderRepository.findByUserAndStatus(user,status).orElseThrow(() -> new EntityNotFoundException("no order in progress for that user")));
+//    }
 
 
 }
