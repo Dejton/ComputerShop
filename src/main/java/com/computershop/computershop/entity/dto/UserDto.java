@@ -15,6 +15,7 @@ public class UserDto {
     private String firstName;
     private String lastName;
     private String login;
+    private String password;
     private String email;
     private String address;
     private String role;
@@ -25,6 +26,7 @@ public class UserDto {
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
                 .login(user.getLogin())
+                .password(user.getPassword())
                 .email(user.getEmail())
                 .address(user.getAddress())
                 .role(user.getRole())
@@ -36,6 +38,7 @@ public class UserDto {
                 .firstName(userDto.getFirstName())
                 .lastName(userDto.getLastName())
                 .login(userDto.getLogin())
+                .password(userDto.getPassword())
                 .email(userDto.getEmail())
                 .address(userDto.getAddress())
                 .role(userDto.getRole())

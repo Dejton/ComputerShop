@@ -40,4 +40,9 @@ public class UserServiceImpl implements UserService {
         if (id < 0) throw new IllegalArgumentException("Enter correct value!");
         return UserDto.mapToDto(userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User with id: " + id + "does not exist!")));
     }
+
+    @Override
+    public User getUserByLogin(String login) {
+        return userRepository.findByLogin(login).orElse(null);
+    }
 }

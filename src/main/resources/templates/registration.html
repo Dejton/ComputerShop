@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+    <link rel="stylesheet" href="/registration.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>User Registration</h2>
+    <form action="/register" method="post">
+        <label for="firstName">First Name:</label><br>
+        <input type="text" id="firstName" name="firstName" th:value="${firstName}" required><br>
+
+        <label for="lastName">Last Name:</label><br>
+        <input type="text" id="lastName" name="lastName" th:value="${lastName}" required><br>
+
+        <label for="login">Login:</label><br>
+        <input type="text" id="login" name="login" th:value="${login}" required><br>
+        <span th:if="${loginError}" th:text="${loginError}" style="color: red;"></span>
+
+        <label for="password">Password:</label><br>
+        <input type="text" id="password" name="password" th:value="${password}" required><br>
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" th:value="${email}" required><br>
+        <span th:if="${emailError}" th:text="${emailError}" style="color: red;"></span><br>
+
+
+        <label for="address">Address:</label><br>
+        <input type="text" id="address" name="address" th:value="${address}" required><br>
+
+        <button type="submit">Register</button>
+    </form>
+</div>
+
+</body>
+</html>

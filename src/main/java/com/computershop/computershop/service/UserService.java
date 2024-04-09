@@ -10,4 +10,6 @@ public interface UserService {
     void deleteUserById(long id);
     List<UserDto> getAllUsers();
     UserDto getUserById(long id);
+
+    User getUserByLogin(String login);
 }

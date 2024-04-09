@@ -22,6 +22,7 @@ public class User {
     private String lastName;
     @Column(nullable = false, unique = true)
     private String login;
+    private String password;
     @Column(nullable = false, unique = true)
     private String email;
     @Column(nullable = false)
