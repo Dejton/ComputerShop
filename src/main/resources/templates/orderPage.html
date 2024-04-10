@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zamówienie</title>
+    <link rel="stylesheet" href="/orderPage.css">
+</head>
+<body>
+<header>
+    <h1>Sklep komputerowy</h1>
+</header>
+<nav>
+    <ul>
+        <li><a href="/">Strona główna</a></li>
+    </ul>
+</nav>
+<main>
+    <h2>Twoje zamówienie</h2>
+    <div class="order-details">
+        <p>Numer zamówienia: <span th:text="'#' + ${order.getId()}"></span></p>
+        <p>Data zamówienia: <span th:text="${order.getDateOfOrder()}"></span></p>
+        <p>Suma zamówienia: <span th:text="'$' + ${order.getTotalValue()}"></span></p>
+    </div>
+    <div class="order-items">
+        <h3>Produkty w zamówieniu:</h3>
+        <ul>
+            <li th:each="product:${products}" >
+                <span th:text="${product.getProduct().getName()}"></span>
+                <span style="font-weight: bold" th:text="'Ilość: ' + ${product.getQuantity()}"></span>
+            </li>
+        </ul>
+    </div>
+    <div>
+        <span><a class="realize-button" href="#">Realize Order</a></span>
+    </div>
+</main>
+<footer>
+    <p>&copy; 2024 Sklep komputerowy. Wszelkie prawa zastrzeżone.</p>
+</footer>
+</body>
+</html>

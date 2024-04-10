@@ -15,6 +15,7 @@ public interface OrderService {
     OrderDto getOrderById(long id);
     ResponseEntity<String> addProductToOrder(Long userId, Long productId, int quantity);
     ResponseEntity<String> updateOrderStatus(Long orderId, String newStatus);
-//    OrderDto getOrderByUserAndStatus(User user, String status);
+    OrderDto getOrderByUserAndStatus(User user, String status);
     List<OrderedProductDto> getAllProductsInCart(User user, String status);
+
 }

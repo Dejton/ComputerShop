@@ -120,10 +120,10 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
-//    @Override
-//    public OrderDto getOrderByUserAndStatus(User user, String status) {
-//        return OrderDto.mapToDto(orderRepository.findByUserAndStatus(user,status).orElseThrow(() -> new EntityNotFoundException("no order in progress for that user")));
-//    }
+    @Override
+    public OrderDto getOrderByUserAndStatus(User user, String status) {
+        return OrderDto.mapToDto(orderRepository.findByUserAndStatus(user,status).orElseThrow(() -> new EntityNotFoundException("no order in progress for that user")));
+    }
 
 
 }

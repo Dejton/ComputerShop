@@ -230,3 +230,23 @@ header h1 {
     height: 300px;
     width: auto;
 }
+
+/*-----------order button------------------*/
+.order-button {
+    display: inline-block;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.order-button:hover {
+    background-color: #45a049;
+}

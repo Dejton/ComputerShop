@@ -1,6 +1,5 @@
 package com.computershop.computershop.controller.web;
 
-import com.computershop.computershop.entity.Category;
 import com.computershop.computershop.entity.User;
 import com.computershop.computershop.entity.dto.CategoryDto;
 import com.computershop.computershop.entity.dto.OrderedProductDto;
@@ -12,23 +11,20 @@ import com.computershop.computershop.service.ProductService;
 import com.computershop.computershop.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.Comparator;
 import java.util.List;
 
 @Controller
-public class ProductsByCategory {
+public class ProductsByCategoryController {
     private final CategoryService categoryService;
     private final UserService userService;
     private final ProductService productService;
     private final OrderService orderService;
 
-    public ProductsByCategory(CategoryService categoryService, UserService userService, ProductService productService, OrderService orderService) {
+    public ProductsByCategoryController(CategoryService categoryService, UserService userService, ProductService productService, OrderService orderService) {
         this.categoryService = categoryService;
         this.userService = userService;
         this.productService = productService;
@@ -58,6 +54,5 @@ public class ProductsByCategory {
         model.addAttribute("categories", categories);
         model.addAttribute("products", sortedProducts);
         return "productsByCategory";
-
     }
 }
