@@ -31,7 +31,6 @@
                 <a href="#" class="dropbtn">Kategorie</a>
                 <div class="dropdown-content">
                     <a th:each="category:${categories}" th:href="@{'/products/' + ${category.getName()}}" th:text="${category.getName()}"></a>
-
                 </div>
             </li>
         </ul>
@@ -40,7 +39,7 @@
 
 <main>
     <div class="product-container">
-        <div class="card" th:each="product:${products}">
+        <div class="card" th:each="product:${productsByCategory}">
             <div class="imgBox">
                 <img src="https://www.corsair.com/corsairmedia/sys_master/productcontent/CH-9300011-NA-M65_PRO_RGB_BLK_04.png" alt="mouse corsair" class="mouse">
             </div>

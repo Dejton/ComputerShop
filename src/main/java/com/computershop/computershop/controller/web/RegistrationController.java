@@ -24,7 +24,7 @@ public class RegistrationController {
 
     @GetMapping
     public String showRegistrationForm(Model model) {
-        return "registration";
+       return "registration";
     }
     @PostMapping
     public String addUserToDB(@ModelAttribute UserDto userDto, Model model) {
