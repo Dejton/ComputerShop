@@ -17,5 +17,5 @@ public interface OrderService {
     ResponseEntity<String> updateOrderStatus(Long orderId, String newStatus);
     OrderDto getOrderByUserAndStatus(User user, String status);
     List<OrderedProductDto> getAllProductsInCart(User user, String status);
-
+    void realizeOrder(Long orderId);
 }

@@ -121,6 +121,21 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public void realizeOrder(Long orderId) {
+        Order order = orderRepository.findById(orderId).orElseThrow(() -> new EntityNotFoundException("order with id: " + orderId + " not found"));
+        for (OrderedProduct orderedProduct: order.getOrderedProducts()) {
+            Product product = orderedProduct.getProduct();
+            int orderedQuantity = orderedProduct.getQuantity();
+            if (product.getAmountInMagazine() >= orderedQuantity) {
+                product.setAmountInMagazine(product.getAmountInMagazine() - orderedQuantity);
+                productRepository.save(product);
+            } else throw new IllegalArgumentException("Not enough products in magazine!");
+        }
+        order.setStatus("Order in progress");
+        orderRepository.save(order);
+    }
+
+    @Override
     public OrderDto getOrderByUserAndStatus(User user, String status) {
         return OrderDto.mapToDto(orderRepository.findByUserAndStatus(user,status).orElseThrow(() -> new EntityNotFoundException("no order in progress for that user")));
     }

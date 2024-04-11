@@ -27,7 +27,7 @@ class OrderServiceTest {
     private OrderRepository orderRepository = mock(OrderRepository.class);
     private UserRepository userRepository = mock(UserRepository.class);
     private ProductRepository productRepository = mock(ProductRepository.class);
-    private OrderServiceImpl orderService = new OrderServiceImpl(orderRepository, productRepository,userRepository);
+    private OrderServiceImpl orderService = new OrderServiceImpl(orderRepository, productRepository, userRepository);
     private Order order;
     private OrderDto orderDto;
     private User user;
@@ -40,7 +40,7 @@ class OrderServiceTest {
     void setUp() {
         orderRepository.deleteAll();
 
-        product =Product.builder()
+        product = Product.builder()
                 .id(1)
                 .name("Laptop Dell XPS 13")
                 .description("Powerful and portable laptop with stunning display.")
@@ -70,6 +70,7 @@ class OrderServiceTest {
                 .build();
         orderDto = OrderDto.mapToDto(order);
     }
+
     @DisplayName("testing adding new order")
     @Test
     void shouldReturnSavedOrder() {
@@ -81,6 +82,7 @@ class OrderServiceTest {
         assertThat(savedOrder).isNotNull();
         assertThat(savedOrder.getId()).isEqualTo(order.getId());
     }
+
     @DisplayName("testing deleting order by id")
     @Test
     void shouldDeleteOrderById() {
@@ -91,6 +93,7 @@ class OrderServiceTest {
 //        then
         verify(orderRepository).deleteById(order.getId());
     }
+
     @DisplayName("testing finding all products")
     @Test
     void shouldReturnListOfAllOrders() {
@@ -103,6 +106,7 @@ class OrderServiceTest {
         assertThat(orders.size()).isEqualTo(1);
         assertThat(orders.get(0).getId()).isEqualTo(order.getId());
     }
+
     @DisplayName("testing finding order by id")
     @Test
     void shouldReturnOrderById() {
@@ -114,6 +118,7 @@ class OrderServiceTest {
         assertThat(foundOrder).isNotNull();
         assertThat(foundOrder.getId()).isEqualTo(order.getId());
     }
+
     @DisplayName("testing finding order by id when does not exist")
     @Test
     void shouldThrowExceptionWhenOrderDoesNotExist() {
@@ -124,6 +129,7 @@ class OrderServiceTest {
         EntityNotFoundException exception = assertThrows(EntityNotFoundException.class, () -> orderService.getOrderById(order.getId()));
         assertEquals("Order with id: " + order.getId() + "not found!", exception.getMessage());
     }
+
     @DisplayName("testing finding order by id when argument is illegal")
     @Test
     void shouldThrowExceptionWhenArgumentIsIllegal() {
@@ -134,6 +140,7 @@ class OrderServiceTest {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> orderService.getOrderById(-10));
         assertEquals("Enter correct value!", exception.getMessage());
     }
+
     @DisplayName("testing adding new product to order")
     @Test
     void shouldReturnPositiveResponse() {
@@ -146,6 +153,7 @@ class OrderServiceTest {
 //        then
         assertThat(response).isEqualTo(ResponseEntity.ok("Product successfully added to your order!"));
     }
+
     @DisplayName("testing adding new product to order when there is no product")
     @Test
     void shouldReturnMessageThatThereIsNoProduct() {
@@ -157,6 +165,7 @@ class OrderServiceTest {
 //        then
         assertThat(response).isEqualTo(ResponseEntity.badRequest().body("Product with id: " + product.getId() + " not found!"));
     }
+
     @DisplayName("testing adding new product to order when there is no order")
     @Test
     void shouldReturnMessageThatThereIsNoOrder() {
@@ -168,6 +177,7 @@ class OrderServiceTest {
 //        then
         assertThat(response).isEqualTo(ResponseEntity.badRequest().body("User with id: " + order.getId() + " not found!"));
     }
+
     @DisplayName("testing adding product to order If there are not enough products in magazine")
     @Test
     void shouldReturnMessageIfThereAreNotEnoughProducts() {
@@ -179,6 +189,7 @@ class OrderServiceTest {
 //        then
         assertThat(response).isEqualTo(ResponseEntity.badRequest().body("Not enough products in magazine!"));
     }
+
     @DisplayName("testing changing status is order")
     @Test
     void shouldReturnPositiveResponseAboutStatusChanging() {
@@ -190,6 +201,7 @@ class OrderServiceTest {
 //        then
         assertThat(response).isEqualTo(ResponseEntity.ok("The order status has been successfully updated."));
     }
+
     @DisplayName("testing changing status if there is no order")
     @Test
     void shouldReturnMessageIfThereIsNoOrder() {
@@ -200,7 +212,5 @@ class OrderServiceTest {
 //        then
         assertThat(response).isEqualTo(ResponseEntity.badRequest().body("Order with id: " + order.getId() + " not found!"));
     }
-
-
 
 }
