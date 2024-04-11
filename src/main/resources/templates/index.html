@@ -46,7 +46,8 @@
     <div class="product-container">
         <div class="card" th:each="product:${products}">
             <div class="imgBox">
-                <img src="https://www.corsair.com/corsairmedia/sys_master/productcontent/CH-9300011-NA-M65_PRO_RGB_BLK_04.png" alt="mouse corsair" class="mouse">
+                <img src="/img/img1.jpg" alt="product img" class="mouse">
+<!--                <img src="" alt="product img" class="product-img">-->
             </div>
             <div class="contentBox">
                 <h3 th:text="${product.getName()}"></h3>

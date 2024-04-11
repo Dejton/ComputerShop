@@ -99,6 +99,7 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+    z-index: 9999;
 }
 header h1 {
     margin-bottom: 10px;
@@ -152,6 +153,15 @@ header h1 {
     color: rgba(0, 0, 0, 0.1);
 }
 
+/*.card .imgBox {*/
+/*    position: relative;*/
+/*    width: 100%;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    padding-top: 20px;*/
+/*    z-index: 1;*/
+/*}*/
 .card .imgBox {
     position: relative;
     width: 100%;
