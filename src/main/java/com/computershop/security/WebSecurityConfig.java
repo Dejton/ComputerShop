@@ -41,7 +41,7 @@ public class WebSecurityConfig {
                                 "/register",
                                 "/api/users").permitAll()
                         .anyRequest().authenticated()
-                );
+                ).logout(logout -> logout.logoutSuccessUrl("/"));
         return http.build();
     }
 

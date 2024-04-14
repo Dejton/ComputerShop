@@ -1,19 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sklep komputerowy</title>
     <link rel="stylesheet" href="/css/style.css">
-    <script src="/script.js"></script>
 </head>
 <body>
 <header>
     <h1>Witaj w sklepie komputerowym</h1>
     <nav>
         <ul>
-            <li><a href="/register">Rejestracja</a></li>
-            <li><a href="#">Logowanie</a></li>
+            <li sec:authorize="!isAuthenticated()"><a href="/register">Rejestracja</a></li>
+            <li sec:authorize="!isAuthenticated()"><a href="/login">Logowanie</a></li>
+            <li sec:authorize="isAuthenticated()">Zalogowany jako <span sec:authentication="name"></span></li>
+            <li sec:authorize="isAuthenticated()"><a href="/logout">Wyloguj</a></li>
             <li class="dropdown">
                 <a href="#" class="dropbtn">Cart</a>
                 <div class="dropdown-content">
@@ -38,10 +39,10 @@
 
                 </div>
             </li>
-<!--            <div th:if="${#authorization.expression('hasRole(''ADMIN'')')}">-->
-<!--                <a href="/add-category" class="admin-button">Add Category</a>-->
-<!--                <a href="/add-product" class="admin-button">Add Product</a>-->
-<!--            </div>-->
+            <div sec:authorize="hasRole('ROLE_ADMIN')">
+                <a href="/add-category" class="admin-button">Add Category</a>
+                <a href="/add-product" class="admin-button">Add Product</a>
+            </div>
         </ul>
     </nav>
 </header>
