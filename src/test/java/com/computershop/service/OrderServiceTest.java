@@ -148,8 +148,9 @@ class OrderServiceTest {
         when(orderRepository.findById(anyLong())).thenReturn(Optional.of(order));
         when(productRepository.findById(anyLong())).thenReturn(Optional.of(product));
         when(orderRepository.save(any(Order.class))).thenReturn(order);
+        when(userRepository.findById(anyLong())).thenReturn(Optional.of(user));
 //        when
-        ResponseEntity<String> response = orderService.addProductToOrder(order.getId(), product.getId(), 1);
+        ResponseEntity<String> response = orderService.addProductToOrder(user.getId(), product.getId(), 1);
 //        then
         assertThat(response).isEqualTo(ResponseEntity.ok("Product successfully added to your order!"));
     }
