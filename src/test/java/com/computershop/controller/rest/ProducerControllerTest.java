@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
@@ -21,11 +22,13 @@ import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.willDoNothing;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(ProducerController.class)
+@WithMockUser()
 class ProducerControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
@@ -35,6 +38,7 @@ class ProducerControllerTest {
     private ProducerService producerService;
     private Producer producer;
     private ProducerDto producerDto;
+
     @BeforeEach
     void setUp() {
         producer = Producer.builder()
@@ -42,6 +46,7 @@ class ProducerControllerTest {
                 .build();
         producerDto = ProducerDto.mapToDto(producer);
     }
+
     @DisplayName("testing adding new producer")
     @Test
     void shouldReturnAddedProducer() throws Exception {
@@ -49,6 +54,7 @@ class ProducerControllerTest {
         given(producerService.addProducer(producerDto)).willReturn(producer);
 //        when
         ResultActions response = mockMvc.perform(post("/api/producers")
+                .with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(producerDto))
         );
@@ -57,6 +63,7 @@ class ProducerControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(content().json(objectMapper.writeValueAsString(producerDto)));
     }
+
     @DisplayName("testing getting all producers")
     @Test
     void shouldReturnListOfAllProducers() throws Exception {
@@ -73,6 +80,7 @@ class ProducerControllerTest {
                 .andExpect(jsonPath("$.size()", is(1)))
                 .andExpect(jsonPath("$[0].id").value(producerDto.getId()));
     }
+
     @DisplayName("testing getting producer by id")
     @Test
     void shouldReturnProducerById() throws Exception {
@@ -88,13 +96,15 @@ class ProducerControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(producerDto)));
     }
+
     @DisplayName("testing deleting producer by id")
     @Test
     void shouldDeleteProducerById() throws Exception {
 //        given
-       willDoNothing().given(producerService).deleteProducerById(producer.getId());
+        willDoNothing().given(producerService).deleteProducerById(producer.getId());
 //        when
         ResultActions response = mockMvc.perform(delete("/api/producers/{id}", producerDto.getId())
+                .with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(producerDto))
         );
