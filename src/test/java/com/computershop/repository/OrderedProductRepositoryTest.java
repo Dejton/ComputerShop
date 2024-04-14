@@ -1,7 +1,7 @@
 package com.computershop.repository;
 
 import com.computershop.TestBase;
-import com.computershop.entity.*;
+import com.computershop.model.entity.*;
 import com.computershop.model.entity.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

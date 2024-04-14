@@ -6,7 +6,6 @@ import com.computershop.repository.OrderRepository;
 import com.computershop.repository.ProductRepository;
 import com.computershop.repository.UserRepository;
 import com.computershop.service.impl.OrderServiceImpl;
-import com.computershop.entity.*;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

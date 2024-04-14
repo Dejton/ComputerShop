@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.SessionManagementConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
 
@@ -17,6 +18,10 @@ import org.springframework.security.web.access.expression.DefaultWebSecurityExpr
 @EnableWebSecurity
 @EnableMethodSecurity
 public class WebSecurityConfig {
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
     @Bean
     public SecurityFilterChain appSecurity(HttpSecurity http) throws Exception {
         http
@@ -35,7 +40,8 @@ public class WebSecurityConfig {
                                 "/add-to-cart",
                                 "/order",
                                 "/products/{category}",
-                                "/register").permitAll()
+                                "/register",
+                                "/api/users").permitAll()
                         .anyRequest().authenticated()
                 );
         return http.build();

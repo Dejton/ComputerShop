@@ -5,6 +5,7 @@ import com.computershop.model.dto.UserDto;
 import com.computershop.repository.UserRepository;
 import com.computershop.service.UserService;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,8 +13,10 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+//    private final BCryptPasswordEncoder bCryptPasswordEncoder;
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
+//        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @Override
@@ -39,6 +42,11 @@ public class UserServiceImpl implements UserService {
         if (id < 0) throw new IllegalArgumentException("Enter correct value!");
         return UserDto.mapToDto(userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User with id: " + id + "does not exist!")));
     }
+
+//    @Override
+//    public String encodePassword(String password) {
+//        return bCryptPasswordEncoder.encode(password);
+//    }
 
     @Override
     public User getUserByLogin(String login) {

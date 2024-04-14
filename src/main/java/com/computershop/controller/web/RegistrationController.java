@@ -4,6 +4,7 @@ import com.computershop.controller.rest.UserController;
 import com.computershop.model.dto.UserDto;
 import com.computershop.service.UserService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,10 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class RegistrationController {
     private final UserService userService;
     private final UserController userController;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public RegistrationController(UserService userService, UserController userController) {
+    public RegistrationController(UserService userService, UserController userController, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userService = userService;
         this.userController = userController;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @GetMapping
@@ -28,7 +31,17 @@ public class RegistrationController {
     }
     @PostMapping
     public String addUserToDB(@ModelAttribute UserDto userDto, Model model) {
-        ResponseEntity<String> response = userController.addUser(userDto);
+        String encodedPassword = bCryptPasswordEncoder.encode(userDto.getPassword());
+        UserDto userWithEncodedPassword = new UserDto(userDto.getId(),
+                userDto.getFirstName(),
+                userDto.getLastName(),
+                userDto.getLogin(),
+                encodedPassword,
+                userDto.getEmail(),
+                userDto.getAddress(),
+                userDto.getRole());
+
+        ResponseEntity<String> response = userController.addUser(userWithEncodedPassword);
 
         if (response.getBody().contains("already exists!")) {
             if (response.getBody().contains("email")) {

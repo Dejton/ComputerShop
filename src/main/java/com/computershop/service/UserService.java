@@ -10,6 +10,6 @@ public interface UserService {
     void deleteUserById(long id);
     List<UserDto> getAllUsers();
     UserDto getUserById(long id);
-
+//    String encodePassword(String password);
     User getUserByLogin(String login);
 }
