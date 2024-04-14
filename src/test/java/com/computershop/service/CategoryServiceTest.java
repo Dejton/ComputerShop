@@ -1,0 +1,194 @@
+package com.computershop.service;
+
+import com.computershop.model.entity.Category;
+import com.computershop.model.dto.CategoryDto;
+import com.computershop.repository.CategoryRepository;
+import com.computershop.service.impl.CategoryServiceImpl;
+import jakarta.persistence.EntityNotFoundException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.springframework.dao.DataIntegrityViolationException;
+
+import java.util.List;
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
+
+class CategoryServiceTest {
+    private final CategoryRepository categoryRepository = mock(CategoryRepository.class);
+    private final CategoryServiceImpl categoryService = new CategoryServiceImpl(categoryRepository);
+    private Category category;
+    private CategoryDto categoryDto;
+
+    @BeforeEach
+    void setUp() {
+        categoryRepository.deleteAll();
+        category = Category.builder()
+                .name("Laptopy")
+                .build();
+        categoryDto = CategoryDto.mapToDto(category);
+    }
+
+    @DisplayName("testing adding new category")
+    @Test
+    void shouldReturnAddedCategory() {
+//        given
+        when(categoryRepository.save(any(Category.class))).thenReturn(category);
+//        when
+        Category savedCategory = categoryService.addCategory(categoryDto);
+//        then
+        assertThat(savedCategory).isNotNull();
+        assertThat(savedCategory.getId()).isEqualTo(category.getId());
+    }
+
+    @DisplayName("testing adding new category when there is a category with the same name")
+    @Test
+    void shouldThrowExceptionWhenTheSameName() {
+//        given
+        Category category2 = Category.builder()
+                .name("Laptopy")
+                .build();
+        CategoryDto categoryDto2 = CategoryDto.mapToDto(category2);
+        when(categoryRepository.save(any(Category.class))).thenThrow(DataIntegrityViolationException.class);
+//        when
+//        then
+        assertThrows(DataIntegrityViolationException.class, () -> categoryService.addCategory(categoryDto2));
+    }
+
+    @DisplayName("testing deleting category by id")
+    @Test
+    void shouldDeleteCategoryById() {
+//        given
+        when(categoryRepository.save(any(Category.class))).thenReturn(category);
+//        when
+        categoryService.deleteCategoryById(category.getId());
+//        then
+        verify(categoryRepository).deleteById(category.getId());
+    }
+
+    @DisplayName("testing editing category by id")
+    @Test
+    void shouldReturnEditedCategory() {
+//        given
+        Category editedCategory = Category.builder()
+                .name("Procesory")
+                .build();
+        CategoryDto categoryToEditDto = CategoryDto.mapToDto(editedCategory);
+        when(categoryRepository.findById(anyLong())).thenReturn(Optional.of(category));
+        when(categoryRepository.save(any(Category.class))).thenReturn(category);
+//        when
+
+        Category editedCategoryById = categoryService.editCategoryById(category.getId(), categoryToEditDto);
+//        then
+        assertThat(editedCategoryById).isNotNull();
+        assertThat(editedCategoryById.getId()).isEqualTo(category.getId());
+    }
+
+    @DisplayName("testing editing category by id when there is no category with that id")
+    @Test
+    void shouldThrowExceptionWhenThereIsNoCategoryById() {
+//        given
+        Category categoryToEdit = Category.builder()
+                .name("Procesory")
+                .build();
+        CategoryDto categoryToEditDto = CategoryDto.mapToDto(categoryToEdit);
+        when(categoryRepository.findById(anyLong())).thenThrow(EntityNotFoundException.class);
+//        when
+//        then
+        assertThrows(EntityNotFoundException.class, () -> categoryService.editCategoryById(category.getId(), categoryToEditDto));
+    }
+    @DisplayName("testing editing category when name is the same like already exist")
+    @Test
+    void shouldThrowExceptionWhenNameIsTheSame() {
+//        given
+        Category categoryToEdit = Category.builder()
+                .name("Procesory")
+                .build();
+        CategoryDto categoryToEditDto = CategoryDto.mapToDto(categoryToEdit);
+        when(categoryRepository.findById(anyLong())).thenReturn(Optional.of(category));
+        when(categoryRepository.save(any(Category.class))).thenThrow(DataIntegrityViolationException.class);
+//        when
+//        then
+        assertThrows(DataIntegrityViolationException.class, () -> categoryService.editCategoryById(category.getId(), categoryToEditDto));
+    }
+    @DisplayName("testing Editing Category WhenName Is Empty")
+    @Test
+    void shouldThrowExceptionWhenNameIsEmpty() {
+//        given
+        Category categoryToEdit = Category.builder()
+                .name("")
+                .build();
+        CategoryDto categoryToEditDto = CategoryDto.mapToDto(categoryToEdit);
+        when(categoryRepository.findById(anyLong())).thenReturn(Optional.of(category));
+        when(categoryRepository.save(any(Category.class))).thenThrow(IllegalArgumentException.class);
+//        when
+//        then
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> categoryService.editCategoryById(category.getId(), categoryToEditDto));
+        assertEquals("name can't be empty!", exception.getMessage());
+    }
+    @DisplayName("testing finding list of all categories")
+    @Test
+    void shouldReturnListOfAllCategories() {
+//        given
+        when(categoryRepository.findAll()).thenReturn(List.of(category));
+//        when
+        List<CategoryDto> categories = categoryService.getAllCategories();
+//        then
+        assertThat(categories).isNotEmpty();
+        assertThat(categories.size()).isEqualTo(1);
+        assertThat(categories.get(0).getId()).isEqualTo(category.getId());
+    }
+//    @DisplayName("testing finding products for category")
+//    @Test
+//    void shouldReturnListOfProductForCategory() {
+////        given
+////        dodać nowy produkt
+//        when(categoryRepository.save(any(Category.class))).thenReturn(category);
+//        when(categoryRepository.findAll()).thenReturn(List.of(category));
+////        when
+//        List<ProductDto> products = categoryService.findAllProductForCategory(category);
+////        then
+//        assertThat(products).isNotEmpty();
+//        assertThat(products.size()).isEqualTo(1);
+//    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -93,8 +93,8 @@ VALUES (1, 'path/to/image1.jpg'), (1, 'path/to/image2.jpg'), (1, 'path/to/image3
 
 
 INSERT INTO users (first_name, last_name, login, email, address, role)
-VALUES ('Jan', 'Kowalski', 'jan_kowalski', 'jan@example.com', 'ul. Testowa 123, Warszawa', 'user');
+VALUES ('Jan', 'Kowalski', 'jan_kowalski', 'jan@example.com', 'ul. Testowa 123, Warszawa', "USER_ROLE");
 INSERT INTO users (first_name, last_name, login, email, address, role)
-VALUES ('Anna', 'Admin', 'anna_admin', 'anna@example.com', 'ul. Admina 1, Kraków', 'admin');
+VALUES ('Anna', 'Admin', 'anna_admin', 'anna@example.com', 'ul. Admina 1, Kraków', "ADMIN_ROLE");
 INSERT INTO users (first_name, last_name, login, email, address, role)
-VALUES ('Adam', 'Nowak', 'adam_nowak', 'adam@example.com', 'ul. Przykładowa 456, Poznań', 'user');
+VALUES ('Adam', 'Nowak', 'adam_nowak', 'adam@example.com', 'ul. Przykładowa 456, Poznań', "USER_ROLE");
