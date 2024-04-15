@@ -1,16 +1,15 @@
 package com.computershop.model.dto;
 
 import com.computershop.model.entity.Producer;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode
 @AllArgsConstructor
 @Builder
 public class ProducerDto {
-    private final long id;
+    private final Long id;
     private final String name;
 
     public static ProducerDto mapToDto(Producer producer) {

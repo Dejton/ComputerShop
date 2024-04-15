@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
@@ -23,11 +24,13 @@ import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.willDoNothing;
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(UserController.class)
+@WithMockUser
 class UserControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
@@ -56,6 +59,7 @@ class UserControllerTest {
         given(userService.addUser(userDto)).willReturn(user);
 //        when
         ResultActions response = mockMvc.perform(post("/api/users")
+                .with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(userDto))
         );
@@ -79,6 +83,7 @@ class UserControllerTest {
         when(userService.getAllUsers()).thenReturn(Collections.singletonList(userDto));
 //        when
         ResultActions response = mockMvc.perform(post("/api/users")
+                .with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(user2dto))
         );
@@ -103,6 +108,7 @@ class UserControllerTest {
         when(userService.getAllUsers()).thenReturn(Collections.singletonList(userDto));
 //        when
         ResultActions response = mockMvc.perform(post("/api/users")
+                .with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(user2dto))
         );
@@ -149,6 +155,7 @@ class UserControllerTest {
         willDoNothing().given(userService).deleteUserById(user.getId());
 //        when
         ResultActions response = mockMvc.perform(delete("/api/users/{id}", userDto.getId())
+                .with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(userDto))
         );

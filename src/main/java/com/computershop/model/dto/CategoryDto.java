@@ -1,17 +1,16 @@
 package com.computershop.model.dto;
 
 import com.computershop.model.entity.Category;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 
 @AllArgsConstructor
 @Builder
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode
 public class CategoryDto {
-    private final long id;
+    private final Long id;
     private final String name;
 
     public static CategoryDto mapToDto(Category category) {

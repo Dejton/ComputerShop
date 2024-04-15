@@ -3,18 +3,17 @@ package com.computershop.model.dto;
 import com.computershop.model.entity.Order;
 import com.computershop.model.entity.OrderedProduct;
 import com.computershop.model.entity.Product;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode
 @AllArgsConstructor
 @Builder
 public class OrderedProductDto {
-    private final long id;
+    private final Long id;
     private final int quantity;
     private final Product product;
     private final Order order;

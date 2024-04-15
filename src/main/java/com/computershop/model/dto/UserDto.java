@@ -1,16 +1,16 @@
 package com.computershop.model.dto;
 
 import com.computershop.model.entity.User;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode
 @Builder
 public class UserDto {
-    private final long id;
+    private final Long id;
     private final String firstName;
     private final String lastName;
     private final String login;

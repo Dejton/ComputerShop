@@ -3,20 +3,19 @@ package com.computershop.model.dto;
 import com.computershop.model.entity.Category;
 import com.computershop.model.entity.Producer;
 import com.computershop.model.entity.Product;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode
 @Builder
 public class ProductDto {
-    private final long id;
+    private final Long id;
     private final String name;
     private final String description;
     private final BigDecimal price;

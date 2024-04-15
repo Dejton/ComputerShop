@@ -36,7 +36,7 @@ public class AddProductController {
         return "addProduct";
     }
     @PostMapping
-    @Secured("ADMIN_ROLE")
+    @Secured("ROLE_ADMIN")
     public String addProduct(@ModelAttribute ProductDto productDto, Model model) {
         productService.addProduct(productDto);
         return "redirect:/";

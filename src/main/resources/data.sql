@@ -93,8 +93,8 @@ VALUES (1, 'path/to/image1.jpg'), (1, 'path/to/image2.jpg'), (1, 'path/to/image3
 
 
 INSERT INTO users (first_name, last_name, login, password, email, address, role)
-VALUES ('Jan', 'Kowalski', 'jan_kowalski', MD5('password1'), 'jan@example.com', 'ul. Testowa 123, Warszawa', "USER_ROLE");
+VALUES ('Jan', 'Kowalski', 'jan_kowalski', MD5('password1'), 'jan@example.com', 'ul. Testowa 123, Warszawa', "ROLE_USER");
 INSERT INTO users (first_name, last_name, login, password, email, address, role)
-VALUES ('Anna', 'Admin', 'anna_admin', MD5('password2'), 'anna@example.com', 'ul. Admina 1, Kraków', "ADMIN_ROLE");
+VALUES ('Anna', 'Admin', 'anna_admin', MD5('password2'), 'anna@example.com', 'ul. Admina 1, Kraków', "ROLE_ADMIN");
 INSERT INTO users (first_name, last_name, login,password, email, address, role)
-VALUES ('Adam', 'Nowak', 'adam_nowak',MD5('password3'), 'adam@example.com', 'ul. Przykładowa 456, Poznań', "USER_ROLE");
+VALUES ('Adam', 'Nowak', 'adam_nowak',MD5('password3'), 'adam@example.com', 'ul. Przykładowa 456, Poznań', "ROLE_USER");

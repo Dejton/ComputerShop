@@ -27,7 +27,7 @@ public class AddCategoryController {
         return"addCategory";
     }
     @PostMapping
-    @Secured("ADMIN_ROLE")
+    @Secured("ROLE_ADMIN")
     public String addCategory(@ModelAttribute CategoryDto categoryDto, Model model) {
         categoryService.addCategory(categoryDto);
         return "redirect:/";

@@ -1,23 +1,22 @@
 package com.computershop.model.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@EqualsAndHashCode
+@Getter
+@Setter
 @Builder
 @Table(name = "ordered_products")
 public class OrderedProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @Column(nullable = false)
     private int quantity;
     @ManyToOne

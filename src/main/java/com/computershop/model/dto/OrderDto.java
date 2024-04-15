@@ -3,10 +3,7 @@ package com.computershop.model.dto;
 import com.computershop.model.entity.Order;
 import com.computershop.model.entity.OrderedProduct;
 import com.computershop.model.entity.User;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -14,10 +11,12 @@ import java.util.List;
 
 
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode
 @Builder
 public class OrderDto {
-    private final long id;
+    private final Long id;
     private final User user;
     private final List<OrderedProduct> orderedProducts;
     private final String deliveryAddress;
