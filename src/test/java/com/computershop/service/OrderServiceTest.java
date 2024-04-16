@@ -41,7 +41,7 @@ class OrderServiceTest {
         orderRepository.deleteAll();
 
         product = Product.builder()
-                .id(1)
+                .id(1L)
                 .name("Laptop Dell XPS 13")
                 .description("Powerful and portable laptop with stunning display.")
                 .price(new BigDecimal("1999.99"))
@@ -61,6 +61,7 @@ class OrderServiceTest {
         userRepository.save(user);
 
         order = Order.builder()
+                .id(1L)
                 .user(user)
                 .orderedProducts(orderedProducts)
                 .deliveryAddress("123 Main Street")
@@ -148,9 +149,8 @@ class OrderServiceTest {
         when(orderRepository.findById(anyLong())).thenReturn(Optional.of(order));
         when(productRepository.findById(anyLong())).thenReturn(Optional.of(product));
         when(orderRepository.save(any(Order.class))).thenReturn(order);
-        when(userRepository.findById(anyLong())).thenReturn(Optional.of(user));
 //        when
-        ResponseEntity<String> response = orderService.addProductToOrder(user.getId(), product.getId(), 1);
+        ResponseEntity<String> response = orderService.addProductToOrder(order.getId(), product.getId(), 1);
 //        then
         assertThat(response).isEqualTo(ResponseEntity.ok("Product successfully added to your order!"));
     }

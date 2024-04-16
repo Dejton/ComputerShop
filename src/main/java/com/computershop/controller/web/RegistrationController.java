@@ -2,6 +2,7 @@ package com.computershop.controller.web;
 
 import com.computershop.controller.rest.UserController;
 import com.computershop.model.dto.UserDto;
+import com.computershop.model.entity.User;
 import com.computershop.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -26,13 +27,14 @@ public class RegistrationController {
     }
 
     @GetMapping
-    public String showRegistrationForm(Model model) {
+    public String showRegistrationForm() {
        return "registration";
     }
     @PostMapping
     public String addUserToDB(@ModelAttribute UserDto userDto, Model model) {
         String encodedPassword = bCryptPasswordEncoder.encode(userDto.getPassword());
-        UserDto userWithEncodedPassword = new UserDto(userDto.getId(),
+        UserDto userWithEncodedPassword = new UserDto(
+                userDto.getId(),
                 userDto.getFirstName(),
                 userDto.getLastName(),
                 userDto.getLogin(),
@@ -40,6 +42,7 @@ public class RegistrationController {
                 userDto.getEmail(),
                 userDto.getAddress(),
                 userDto.getRole());
+        System.out.println(encodedPassword);
 
         ResponseEntity<String> response = userController.addUser(userWithEncodedPassword);
 

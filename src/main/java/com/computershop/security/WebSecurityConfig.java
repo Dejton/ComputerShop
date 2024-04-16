@@ -39,6 +39,7 @@ public class WebSecurityConfig {
                                 "/img/**",
                                 "/products/{category}",
                                 "/register",
+                                "/error",
                                 "/api/users").permitAll()
                         .anyRequest().authenticated()
                 ).logout(logout -> logout.logoutSuccessUrl("/"));

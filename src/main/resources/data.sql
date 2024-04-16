@@ -98,3 +98,5 @@ INSERT INTO users (first_name, last_name, login, password, email, address, role)
 VALUES ('Anna', 'Admin', 'anna_admin', MD5('password2'), 'anna@example.com', 'ul. Admina 1, Kraków', "ROLE_ADMIN");
 INSERT INTO users (first_name, last_name, login,password, email, address, role)
 VALUES ('Adam', 'Nowak', 'adam_nowak',MD5('password3'), 'adam@example.com', 'ul. Przykładowa 456, Poznań', "ROLE_USER");
+INSERT INTO users (first_name, last_name, login,password, email, address, role)
+VALUES ('Adam', 'Nowak', 'dejton',"$2a$10$nJhW1uZ8NRdPXWD.i6141u0kF9FZVl6./JuqyeG6m9Px1/JoqVWeq", 'dejton@gmail.com', 'ul. Przykładowa 456, Poznań', "ROLE_USER");
