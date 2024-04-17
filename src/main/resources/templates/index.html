@@ -8,7 +8,7 @@
 </head>
 <body>
 <header>
-    <h1>Witaj w sklepie komputerowym</h1>
+    <h1><a href="/">Witaj w sklepie komputerowym</a></h1>
     <nav>
         <ul>
             <li sec:authorize="!isAuthenticated()"><a href="/register">Rejestracja</a></li>
@@ -38,17 +38,16 @@
 
                 </div>
             </li>
-            <div sec:authorize="hasRole('ROLE_ADMIN')">
-                <a href="/add-category" class="admin-button">Add Category</a>
-                <a href="/add-product" class="admin-button">Add Product</a>
-            </div>
+            <li sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a href="/add-category" class="admin-button">Add Category</a>
+                    <a href="/add-product" class="admin-button">Add Product</a>
+            </li>
         </ul>
     </nav>
 </header>
 
 <main>
     <div class="product-container">
-<!--        <div class="card" th:each="product:${products}">-->
         <div class="card" th:if="${currentPath.equals('/')}" th:each="product:${products}">
             <div class="imgBox">
                 <img src="/img/img1.jpg" alt="product img" class="product-img">
@@ -62,7 +61,7 @@
                             <option th:each="i : ${#numbers.sequence(1, product.getAmountInMagazine())}" th:value="${i}" th:text="${i}"></option>
                         </select>
                         <label for="id"></label>
-                        <input type="hidden" th:value="${product.getId()}" id="id" name="id" required>
+                        <input type="hidden" th:value="${product.getId()}" name="id" required>
                     </div>
                     <button type="submit" class="buy">Add to Cart</button>
                 </form>
