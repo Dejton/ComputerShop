@@ -4,28 +4,30 @@ import com.computershop.model.dto.OrderDto;
 import com.computershop.model.entity.User;
 import com.computershop.service.OrderService;
 import com.computershop.service.UserService;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
 
 @Controller
-public class RealizeOrderController {
+@RequestMapping("/order")
+public class OrderPageController {
     private final OrderService orderService;
     private final UserService userService;
 
-    public RealizeOrderController(OrderService orderService, UserService userService) {
+    public OrderPageController(OrderService orderService, UserService userService) {
         this.orderService = orderService;
         this.userService = userService;
     }
 
-    @GetMapping("/realize-order")
-    @Secured({"ROLE_USER", "ROLE_ADMIN"})
-    public String realizeOrder(Principal principal) {
+    @GetMapping
+    public String showOrderPage(Model model, Principal principal) {
         User user = userService.getUserByLogin(principal.getName());
         OrderDto order = orderService.getOrderByUserAndStatus(user, "In progress");
-        orderService.realizeOrder(order.getId());
-        return "redirect:/";
+
+        model.addAttribute("order", order);
+        return "orderPage";
     }
 }
