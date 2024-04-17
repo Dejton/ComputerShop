@@ -41,6 +41,7 @@ public class WebSecurityConfig {
                                 "/products/{category}",
                                 "/register",
                                 "/error",
+                                "/product-info/{id}",
                                 "/api/users").permitAll()
                         .anyRequest().authenticated()
                 ).logout(logout -> logout.logoutSuccessUrl("/"));

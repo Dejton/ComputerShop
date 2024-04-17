@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Information</title>
+    <link rel="stylesheet" href="/css/productInfo.css">
+</head>
+<body>
+<div class="product-info">
+    <!-- Odnośnik do strony głównej -->
+    <a href="/" class="homepage">Back to Home</a>
+    <!-- Zdjęcie produktu -->
+    <div class="images">
+        <img th:src="${images.getFirst()}" th:each="image:${images}" alt="Product Image" class="product-image">
+    </div>
+
+    <!-- Nazwa produktu -->
+    <h1 th:text="${product.getName()}"></h1>
+    <!-- Opis produktu -->
+    <p th:text="${product.getDescription()}"></p>
+    <!-- Cena produktu -->
+    <p th:text="'Price: ' + ${product.getPrice()} + '$'"></p>
+    <!-- Wybór ilości produktu -->
+    <form action="/add-order" method="post" >
+        <div class="form-group">
+            <select class="quantitySelector" name="quantity" th:if="${product.getAmountInMagazine() > 0}">
+                <option th:each="i : ${#numbers.sequence(1, product.getAmountInMagazine())}" th:value="${i}" th:text="${i}"></option>
+            </select>
+            <label for="id"></label>
+            <input type="hidden" th:value="${product.getId()}" id="id" name="id" required>
+        </div>
+        <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+    </form>
+
+
+</div>
+</body>
+</html>

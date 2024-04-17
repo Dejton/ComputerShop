@@ -35,6 +35,14 @@ nav ul li a {
     text-decoration: none;
     margin-right: 20px;
 }
+.product-name {
+    font-size: 18px;
+    color: white;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+}
 
 .dropdown {
     position: relative;
@@ -204,13 +212,13 @@ header h1 a {
     z-index: 2;
 }
 
-.card .contentBox h3 {
-    font-size: 18px;
-    color: white;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
+/*.card .contentBox h3 {*/
+/*    font-size: 18px;*/
+/*    color: white;*/
+/*    font-weight: 500;*/
+/*    text-transform: uppercase;*/
+/*    letter-spacing: 1px;*/
+/*}*/
 
 .card .contentBox .price {
     font-size: 24px;

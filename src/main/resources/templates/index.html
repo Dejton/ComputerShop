@@ -53,7 +53,9 @@
                 <img src="/img/img1.jpg" alt="product img" class="product-img">
             </div>
             <div class="contentBox">
-                <h3 th:text="${product.getName()}"></h3>
+                <h3>
+                    <a class="product-name" th:href="@{/product-info/{id}(id=${product.getId()})}" th:text="${product.getName()}"></a>
+                </h3>
                 <h2 class="price" th:text="${product.getPrice()} + ' $'" ></h2>
                 <form action="/add-order" method="post" >
                     <div class="form-group">
@@ -72,7 +74,9 @@
                 <img src="/img/img1.jpg" alt="product img" class="product-img">
             </div>
             <div class="contentBox">
-                <h3 th:text="${product.getName()}"></h3>
+                <h3>
+                    <a class="product-name" th:href="@{/product-info/{id}(id=${product.getId()})}" th:text="${product.getName()}"></a>
+                </h3>
                 <h2 class="price" th:text="${product.getPrice()} + ' $'" ></h2>
                 <form action="/add-order" method="post" >
                     <div class="form-group">
