@@ -8,13 +8,13 @@
 </head>
 <body>
 <header>
-    <h1><a href="/">Witaj w sklepie komputerowym</a></h1>
+    <h1><a href="/">Welcome to computer shop</a></h1>
     <nav>
         <ul>
-            <li sec:authorize="!isAuthenticated()"><a href="/register">Rejestracja</a></li>
-            <li sec:authorize="!isAuthenticated()"><a href="/login">Logowanie</a></li>
-            <li sec:authorize="isAuthenticated()">Zalogowany jako <span sec:authentication="name"></span></li>
-            <li sec:authorize="isAuthenticated()"><a href="/logout">Wyloguj</a></li>
+            <li sec:authorize="!isAuthenticated()"><a href="/register">Sign in</a></li>
+            <li sec:authorize="!isAuthenticated()"><a href="/login">Login</a></li>
+            <li sec:authorize="isAuthenticated()">Welcome <span sec:authentication="name"></span></li>
+            <li sec:authorize="isAuthenticated()"><a href="/logout">Logout</a></li>
             <li class="dropdown">
                 <a href="#" class="dropbtn">Cart</a>
                 <div class="dropdown-content">
@@ -32,7 +32,7 @@
                 </div>
             </li>
             <li class="dropdown">
-                <a href="#" class="dropbtn">Kategorie</a>
+                <a href="#" class="dropbtn">Categories</a>
                 <div class="dropdown-content">
                     <a th:each="category:${categories}" th:href="@{'/products/' + ${category.getName()}}" th:text="${category.getName()}"></a>
 

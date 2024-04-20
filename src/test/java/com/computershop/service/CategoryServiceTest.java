@@ -29,6 +29,7 @@ class CategoryServiceTest {
     void setUp() {
         categoryRepository.deleteAll();
         category = Category.builder()
+                .id(1L)
                 .name("Laptopy")
                 .build();
         categoryDto = CategoryDto.mapToDto(category);

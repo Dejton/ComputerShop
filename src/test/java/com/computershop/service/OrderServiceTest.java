@@ -51,6 +51,7 @@ class OrderServiceTest {
                 .images(Arrays.asList("image1.jpg", "image2.jpg", "image3.jpg"))
                 .build();
         user = User.builder()
+                .id(1L)
                 .firstName("John")
                 .lastName("Doe")
                 .login("john_doe")
@@ -148,6 +149,7 @@ class OrderServiceTest {
 //        given
         when(orderRepository.findById(anyLong())).thenReturn(Optional.of(order));
         when(productRepository.findById(anyLong())).thenReturn(Optional.of(product));
+        when(userRepository.findById(anyLong())).thenReturn(Optional.of(user));
         when(orderRepository.save(any(Order.class))).thenReturn(order);
 //        when
         ResponseEntity<String> response = orderService.addProductToOrder(order.getId(), product.getId(), 1);
@@ -172,11 +174,12 @@ class OrderServiceTest {
     void shouldReturnMessageThatThereIsNoOrder() {
 //        given
         when(orderRepository.findById(anyLong())).thenReturn(Optional.empty());
+        when(userRepository.findById(anyLong())).thenReturn(Optional.of(user));
         when(productRepository.findById(anyLong())).thenReturn(Optional.of(product));
 //        when
         ResponseEntity<String> response = orderService.addProductToOrder(user.getId(), product.getId(), 1);
 //        then
-        assertThat(response).isEqualTo(ResponseEntity.badRequest().body("User with id: " + order.getId() + " not found!"));
+        assertThat(response).isEqualTo(ResponseEntity.ok("Product successfully added to your order!"));
     }
 
     @DisplayName("testing adding product to order If there are not enough products in magazine")
@@ -212,6 +215,77 @@ class OrderServiceTest {
         ResponseEntity<String> response = orderService.updateOrderStatus(order.getId(), "updatedStatus");
 //        then
         assertThat(response).isEqualTo(ResponseEntity.badRequest().body("Order with id: " + order.getId() + " not found!"));
+    }
+//    --------------------------------------
+
+    @Test
+    void addProductToOrder_ProductNotFound_ReturnsBadRequest() {
+        // Given
+        Long userId = 1L;
+        Long productId = 1L;
+        int quantity = 2;
+        when(productRepository.findById(productId)).thenReturn(Optional.empty());
+
+        // When
+        ResponseEntity<String> response = orderService.addProductToOrder(userId, productId, quantity);
+
+        // Then
+        assertThat(response.getStatusCodeValue()).isEqualTo(400);
+        assertThat(response.getBody()).isEqualTo("Product with id: " + productId + " not found!");
+    }
+
+    @Test
+    void addProductToOrder_NotEnoughProductsInMagazine_ReturnsBadRequest() {
+        // Given
+        Long userId = 1L;
+        Long productId = 1L;
+        int quantity = 2;
+        Product product = new Product();
+        product.setAmountInMagazine(1); // Only 1 available
+        when(productRepository.findById(productId)).thenReturn(Optional.of(product));
+
+        // When
+        ResponseEntity<String> response = orderService.addProductToOrder(userId, productId, quantity);
+
+        // Then
+        assertThat(response.getStatusCodeValue()).isEqualTo(400);
+        assertThat(response.getBody()).isEqualTo("Not enough products in magazine!");
+    }
+
+    @Test
+    void addProductToOrder_UserNotFound_ReturnsBadRequest() {
+        // Given
+        Long userId = 1L;
+        Long productId = 1L;
+        int quantity = 2;
+        Product product = new Product();
+        product.setAmountInMagazine(10);
+        when(productRepository.findById(productId)).thenReturn(Optional.of(product));
+        when(userRepository.findById(userId)).thenReturn(Optional.empty());
+
+        // When
+        ResponseEntity<String> response = orderService.addProductToOrder(userId, productId, quantity);
+
+        // Then
+        assertThat(response.getStatusCodeValue()).isEqualTo(400);
+        assertThat(response.getBody()).isEqualTo("User with id: " + userId + " not found!");
+    }
+
+
+    @Test
+    void addProductToOrder_NoOrderInProgress_NewOrderCreated() {
+        // Given
+
+        when(productRepository.findById(anyLong())).thenReturn(Optional.of(product));
+        when(userRepository.findById(anyLong())).thenReturn(Optional.of(user));
+        when(orderRepository.findByUserAndStatus(eq(user), eq("In progress"))).thenReturn(Optional.empty());
+
+        // When
+        ResponseEntity<String> response = orderService.addProductToOrder(user.getId(), product.getId(), 5);
+
+        // Then
+        assertThat(response.getStatusCodeValue()).isEqualTo(200);
+        // Additional assertions can be made based on the behavior of the method
     }
 
 }

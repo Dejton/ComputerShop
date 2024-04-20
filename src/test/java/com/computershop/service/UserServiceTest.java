@@ -139,6 +139,16 @@ class UserServiceTest {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> userService.getUserById(-10));
         assertEquals("Enter correct value!", exception.getMessage());
     }
+    @DisplayName("testing finding user by login")
+    @Test
+    void shouldReturnUserByLogin() {
+//        given
+        when(userRepository.findByLogin(anyString())).thenReturn(Optional.of(user));
+//        when
+        User foundUser = userService.getUserByLogin(user.getLogin());
+//        then
+        assertThat(foundUser).isEqualTo(user);
+    }
 
 }
 

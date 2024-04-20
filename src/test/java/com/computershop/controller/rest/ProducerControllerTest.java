@@ -42,6 +42,7 @@ class ProducerControllerTest {
     @BeforeEach
     void setUp() {
         producer = Producer.builder()
+                .id(1L)
                 .name("Dell")
                 .build();
         producerDto = ProducerDto.mapToDto(producer);

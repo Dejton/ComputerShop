@@ -48,6 +48,7 @@ class ProductControllerTest {
     @BeforeEach
     void setUp() {
         product = Product.builder()
+                .id(1L)
                 .name("Laptop Dell XPS 13")
                 .description("Powerful and portable laptop with stunning display.")
                 .price(new BigDecimal("1999.99"))

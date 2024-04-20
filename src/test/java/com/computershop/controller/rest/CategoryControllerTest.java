@@ -44,6 +44,7 @@ class CategoryControllerTest {
     @BeforeEach
     void setUp() {
        category = Category.builder()
+               .id(1L)
                 .name("Laptopy")
                 .build();
        categoryDto = CategoryDto.mapToDto(category);

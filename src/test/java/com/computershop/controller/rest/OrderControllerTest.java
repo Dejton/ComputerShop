@@ -50,6 +50,7 @@ class OrderControllerTest {
     @BeforeEach
     void setUp() {
         order = Order.builder()
+                .id(1L)
                 .user(user)
                 .orderedProducts(orderedProducts)
                 .deliveryAddress("123 Main Street")

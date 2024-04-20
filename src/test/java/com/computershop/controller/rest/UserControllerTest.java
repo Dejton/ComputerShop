@@ -43,6 +43,7 @@ class UserControllerTest {
     @BeforeEach
     void setUp() {
         user = User.builder()
+                .id(1L)
                 .firstName("John")
                 .lastName("Doe")
                 .login("john_doe")

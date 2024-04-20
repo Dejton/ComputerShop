@@ -35,6 +35,7 @@ class OrderedProductServiceTest {
         orderedProductRepository.deleteAll();
 
         orderedProduct = OrderedProduct.builder()
+                .id(1L)
                 .quantity(2)
                 .product(product)
                 .order(order)

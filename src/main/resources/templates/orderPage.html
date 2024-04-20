@@ -9,22 +9,22 @@
 </head>
 <body>
 <header>
-    <h1>Sklep komputerowy</h1>
+    <h1>Computer shop</h1>
 </header>
 <nav>
     <ul>
-        <li><a href="/">Strona główna</a></li>
+        <li><a href="/">Home page</a></li>
     </ul>
 </nav>
 <main>
     <h2>Twoje zamówienie</h2>
     <div class="order-details">
-        <p>Numer zamówienia: <span th:text="'#' + ${order.getId()}"></span></p>
-        <p>Data zamówienia: <span th:text="${order.getDateOfOrder()}"></span></p>
-        <p>Suma zamówienia: <span th:text="'$' + ${order.getTotalValue()}"></span></p>
+        <p>Order number: <span th:text="'#' + ${order.getId()}"></span></p>
+        <p>Date of order: <span th:text="${order.getDateOfOrder()}"></span></p>
+        <p>Total value: <span th:text="'$' + ${order.getTotalValue()}"></span></p>
     </div>
     <div class="order-items">
-        <h3>Produkty w zamówieniu:</h3>
+        <h3>Products in order:</h3>
         <ul>
             <li th:each="product:${products}" >
                 <span th:text="${product.getProduct().getName()}"></span>
