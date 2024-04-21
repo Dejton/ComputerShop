@@ -2,6 +2,7 @@ package com.computershop.controller.rest;
 
 import com.computershop.model.entity.Category;
 import com.computershop.model.dto.CategoryDto;
+import com.computershop.security.WebSecurityConfig;
 import com.computershop.service.CategoryService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -31,6 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(CategoryController.class)
 @WithMockUser
+@Import(WebSecurityConfig.class)
 class CategoryControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
