@@ -30,6 +30,7 @@ class UserServiceTest {
     void setUp() {
         userRepository.deleteAll();
         user = User.builder()
+                .id(1L)
                 .firstName("John")
                 .lastName("Doe")
                 .login("john_doe")

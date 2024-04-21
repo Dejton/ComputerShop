@@ -31,6 +31,7 @@ class ProducerServiceTest {
         producerRepository.deleteAll();
 
         producer = Producer.builder()
+                .id(1L)
                 .name("Dell")
                 .build();
         producerDto = ProducerDto.mapToDto(producer);

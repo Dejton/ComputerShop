@@ -140,7 +140,7 @@ class OrderedProductRepositoryTest extends TestBase {
     void shouldReturnEmptyOptional() {
 //        given
 //        when
-        Optional<OrderedProduct> foundOrderedProduct = orderedProductRepository.findById(orderedProduct.getId());
+        Optional<OrderedProduct> foundOrderedProduct = orderedProductRepository.findById(1L);
 //        then
         assertThat(foundOrderedProduct).isEmpty();
     }

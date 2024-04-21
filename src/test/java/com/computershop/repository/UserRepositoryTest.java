@@ -116,7 +116,7 @@ class UserRepositoryTest extends TestBase {
     void shouldReturnEmptyOptionalWhenDoesNotExist() {
 //        given
 //        when
-        Optional<User> foundUser = userRepository.findById(user.getId());
+        Optional<User> foundUser = userRepository.findById(1L);
 //        then
         assertThat(foundUser).isNotNull();
         assertThat(foundUser).isEmpty();

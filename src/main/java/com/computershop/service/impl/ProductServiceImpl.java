@@ -28,12 +28,12 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public void deleteProductById(long id) {
+    public void deleteProductById(Long id) {
         productRepository.deleteById(id);
     }
 
     @Override
-    public Product editProductById(long id, ProductDto updatedProductDto) {
+    public Product editProductById(Long id, ProductDto updatedProductDto) {
         Product productToEdit = productRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Product with id: " + id + "not found."));
         productToEdit.setName(updatedProductDto.getName());
         productToEdit.setDescription(updatedProductDto.getDescription());
@@ -64,7 +64,7 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public ProductDto getProductById(long id) {
+    public ProductDto getProductById(Long id) {
         if (id <= 0) {
             throw new IllegalArgumentException("Enter correct value!");
         }

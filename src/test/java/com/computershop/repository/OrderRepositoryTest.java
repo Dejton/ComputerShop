@@ -99,7 +99,7 @@ class OrderRepositoryTest extends TestBase {
     void shouldReturnEmptyOptional() {
 //        given
 //        when
-        Optional<Order> foundOrder = orderRepository.findById(order.getId());
+        Optional<Order> foundOrder = orderRepository.findById(1L);
 //        then
         assertThat(foundOrder).isEmpty();
     }

@@ -38,14 +38,17 @@ class ProductServiceTest {
         productRepository.deleteAll();
 
         producer = Producer.builder()
+                .id(1L)
                 .name("Dell")
                 .build();
 
         category = Category.builder()
+                .id(1L)
                 .name("Laptopy")
                 .build();
 
         product = Product.builder()
+                .id(1L)
                 .name("Laptop Dell XPS 13")
                 .description("Powerful and portable laptop with stunning display.")
                 .price(new BigDecimal("1999.99"))
@@ -276,7 +279,7 @@ class ProductServiceTest {
         when(productRepository.findById(anyLong())).thenReturn(Optional.empty());
 //        when
 //        then
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> productService.getProductById(-8));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> productService.getProductById(-8L));
         assertEquals("Enter correct value!", exception.getMessage());
     }
 
